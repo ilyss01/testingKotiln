@@ -7,19 +7,21 @@ fun printHello() {
 
 fun printHelloWorld() = println("Hello world")
 
-fun helloForEach (greeting: String, itemsToGreet:Array <String>) {
+fun helloForEach (greeting: String, itemsToGreet: Array <String>) {
     itemsToGreet.forEach{ itemToGreet ->
         println("$greeting $itemToGreet")
     }
 }
 
-fun sayHello(greeting:String, vararg itemsToGreet:String){
-    // vararg accepts anything with String type. If itemsToGreet are not got by the function - it will be skipped
+fun sayHello(greeting: String, vararg itemsToGreet: String){
+    // vararg accepts anything with String type. If itemsToGreet are not got by the function - it will not be executed
     itemsToGreet.forEach{ itemToGreet ->
         println("$greeting $itemToGreet")
     }
 }
 
+fun greetPerson(greeting: String = "Hello", name: String = "Kotlin") = println("$greeting $name")
+// default greeting argument is "Hello" so it may be not specified
 
 fun main() {
     var name: String = "Ilya"
@@ -40,7 +42,7 @@ fun main() {
     * Char abc...xyz
     * String anything
 
-    Adding "?" at the end of the VarType makes variable available  being null         */
+    Adding "?" at the end of the VarType makes variable available being null         */
 
     printHello()
     printHelloWorld()
@@ -51,10 +53,10 @@ fun main() {
     \n - new line
     \' - single quotation mark
     \" - double quotation mark
-    \\ - back slash                         */
+    \\ - backslash                         */
 
     val greeting = if (name == "Ilya") "Hello Ilya" else "Hello stranger"
-    //             if (statement) *then* else *else*
+    //             if (statement) command1 else command2
 
     when (greeting) {
         //statement -> command
@@ -64,11 +66,11 @@ fun main() {
     }
     // when thing can be done with variables: var a = when(b){...}
 
-    // it's ARRAY, not list. Only one type of data allowed. Also less memory consumed
+    // it's ARRAY, not list. Only one type of data allowed. Also, less memory consumed
     val interestingThings = arrayOf("Programming", "Android", "Linux things", "Dr Pepper")
     // by default arrays/lists are immutable, to make them mutable it should be "mutableArrayOf"
-    println(interestingThings.size) // build in function that returns size of the array
-    println(interestingThings[0])   // prints out first element of the array, negative indexes are not included
+    println(interestingThings.size) // returns size of the array
+    println(interestingThings[0])   // prints out first element of the array, negative indexes are not working
 
     for (i in interestingThings) {
         // iterable variable shouldn't be initialized
@@ -84,30 +86,38 @@ fun main() {
          */
         println(i)
     }
+
     // or
+
     interestingThings.forEachIndexed { index, interestingThing ->
         // you know index of the value
         println("$interestingThing is at index $index")
     }
 
     val awesomeThings = mutableListOf("Winter", "Music") // list of things
-    // a[i] works
     awesomeThings.add("Playing guitar") // adds things to the list
     awesomeThings.forEach { i -> println(i) }
 
     val map = mutableMapOf(1 to "a", 2 to "b", 3 to "c") // basically dictionary in python
-    map.forEach { key, value -> println("$key -> $value") } // can be separated to 3 lines like in line 73
+    map.forEach { key, value -> println("$key -> $value") } // can be separated to 3 lines like in block in line 73
     map.put(4, "d") // add pair to the map
 
     helloForEach("Greetings", interestingThings)
-    sayHello("Hi", "John")
 
+    sayHello("Hi", "Anon", "Ilya", "user")
+    sayHello("Hi") // wouldn't work because no itemsToGreet
+    sayHello("hi", *interestingThings) // if no "*" - the program will crush
 
+    greetPerson(greeting = "Greetings", name = "traveler") // good practice is to specify what parameters you are giving to the function
+    greetPerson(name = "traveler", greeting = "Greetings")
+    greetPerson(name = "Ilya")
+    greetPerson() // Hello Kotlin by default
 
+    sayHello(itemsToGreet = *interestingThings, greeting = "Hi") // EVERY parameter must have been specified
 
-
-
-
-
-
+    // CLASSES
+    val person = Person()
+    person.firstName
+    person.lastName
+    person.nickName = "ilyss01"
 }
