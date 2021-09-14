@@ -115,9 +115,16 @@ fun main() {
 
     sayHello(itemsToGreet = *interestingThings, greeting = "Hi") // EVERY parameter must have been specified
 
+    println("")
+    println("============Classes============")
+    println("")
+
     // CLASSES
+
     val person = Person()
     person.firstName
     person.lastName
     person.nickName = "ilyss01"
+    person.nickName = "modless_flash"
+    print(person.nickName)
 }
